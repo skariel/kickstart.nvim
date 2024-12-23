@@ -311,6 +311,96 @@ require('lazy').setup({
   },
 
   {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        modules = {},
+        sync_install = false,
+        ensure_installed = {},
+        ignore_install = {},
+        auto_install = true,
+
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              -- Function related
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+
+              -- Class related
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+
+              -- Scope related
+              ['as'] = '@scope.outer',
+              ['is'] = '@scope.inner',
+
+              -- Block related
+              ['ab'] = '@block.outer',
+              ['ib'] = '@block.inner',
+
+              -- Conditional related
+              ['ai'] = '@conditional.outer',
+              ['ii'] = '@conditional.inner',
+
+              -- Loop related
+              ['al'] = '@loop.outer',
+              ['il'] = '@loop.inner',
+
+              -- Parameter/argument related
+              ['aa'] = '@parameter.outer',
+              ['ia'] = '@parameter.inner',
+            },
+          },
+          move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+              [']f'] = '@function.outer',
+              [']c'] = '@class.outer',
+              [']s'] = '@scope.outer',
+              [']b'] = '@block.outer',
+              [']i'] = '@conditional.outer',
+              [']l'] = '@loop.outer',
+              [']a'] = '@parameter.outer',
+            },
+            goto_next_end = {
+              [']F'] = '@function.outer',
+              [']C'] = '@class.outer',
+              [']S'] = '@scope.outer',
+              [']B'] = '@block.outer',
+              [']I'] = '@conditional.outer',
+              [']L'] = '@loop.outer',
+              [']A'] = '@parameter.outer',
+            },
+            goto_previous_start = {
+              ['[f'] = '@function.outer',
+              ['[c'] = '@class.outer',
+              ['[s'] = '@scope.outer',
+              ['[b'] = '@block.outer',
+              ['[i'] = '@conditional.outer',
+              ['[l'] = '@loop.outer',
+              ['[a'] = '@parameter.outer',
+            },
+            goto_previous_end = {
+              ['[F'] = '@function.outer',
+              ['[C'] = '@class.outer',
+              ['[S'] = '@scope.outer',
+              ['[B'] = '@block.outer',
+              ['[I'] = '@conditional.outer',
+              ['[L'] = '@loop.outer',
+              ['[A'] = '@parameter.outer',
+            },
+          },
+        },
+      }
+    end,
+  },
+
+  {
     'folke/noice.nvim',
     event = 'VeryLazy',
     opts = {
