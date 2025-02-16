@@ -84,6 +84,21 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- AUTORELOAD!
+-- Enable auto read when a file is changed from outside
+vim.opt.autoread = true
+
+-- Create an autocommand group for the file change detection
+vim.api.nvim_create_augroup('checktime', { clear = true })
+
+-- Create the autocommand that triggers the check
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' }, {
+  group = 'checktime',
+  command = 'checktime',
+})
+-- Set updatetime to 1000ms (1 second)
+vim.opt.updatetime = 1000
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -283,9 +298,9 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter-context',
     event = 'VeryLazy',
     opts = function()
-      return { mode = 'topline', max_lines = 3 }
+      return { mode = 'topline', max_lines = 32 }
     end,
-    vim.keymap.set('n', '[c', function()
+    vim.keymap.set('n', '[x', function()
       require('treesitter-context').go_to_context(vim.v.count1)
     end, { desc = 'Context', silent = true }),
   },
