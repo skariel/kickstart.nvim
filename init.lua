@@ -1,5 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
+
+-- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
 vim.opt.number = false
@@ -50,6 +52,7 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
   'tpope/vim-sleuth',
+  'sindrets/diffview.nvim',
   {
     'lewis6991/gitsigns.nvim',
     opts = {
